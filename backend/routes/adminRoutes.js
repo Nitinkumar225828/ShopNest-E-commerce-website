@@ -1,6 +1,6 @@
 const express = require('express');
-const { protect } = require('../middleware/authMiddleware');
-const { admin }  = require('../middleware/adminMiddleware');
+const { protect } = require('../middleware/authmiddleware');
+const { admin }  = require('../middleware/adminmiddleware');
 
 const { getAdminStats } = require('../controllers/adminController');
 
