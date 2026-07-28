@@ -1,0 +1,17 @@
+BACKEND
+
+Use of Each File/Folder⚡
+
+index.js (The Entry Point)Use: This acts as the gatekeeper and structural backbone of your app.What it does: It creates the Express application instance, configures global parsing middlewares (like express.json()), hooks up your database, mounts your routing entrypoints, and bootstraps the HTTP server onto a dedicated network port.
+
+⚙️ config/ (The Environment Central)Use: Houses your global constants and environment settings.What it does: Centralizes configurations like connection keys for your database, third-party API configurations, and orchestration engines like dotenv to safely load environment variables.
+
+🚦 routes/ (The Traffic Directors)Use: Exposes application endpoints to the outside world.What it does: Binds URLs and HTTP verbs (such as GET /api/users or POST /api/login) to the correct controller functions. It does not contain any complex logic; it simply acts as an address directory mapping endpoints.
+
+🧩 middleware/ (The Security Checkpoints)Use: Intercepts and alters requests right before they hit your core logic handlers.What it does: Holds highly reusable functions that authenticate JWT auth tokens, execute broad input schema validation, perform rate-limiting, or act as global catch-blocks for handling server errors.
+
+🎮 controller/ (The Core Handlers)Use: Manages the entire request-response life cycle.What it does: Extracts data blocks from incoming parameters, coordinates application flow control, communicates directly with database models, and generates the final client-facing HTTP status and JSON response payload.
+
+🗄️ models/ (The Data Blueprints)Use: Interacts with the database and outlines how your database collections or rows look.What it does: Leverages Object-Relational/Document Mapping wrappers (such as Mongoose or Prisma) to enforce schema structures, enforce default data properties, and query data tables.
+
+🛠️ utils/ (The Utility Toolbox)Use: Keeps general-purpose helper functions available app-wide.What it does: Keeps small, repetitive, infrastructure-free scripts separate from your business flow. Examples include password hashing routines, timestamp formatters, currency math tools, and email generator SCRIPT.
