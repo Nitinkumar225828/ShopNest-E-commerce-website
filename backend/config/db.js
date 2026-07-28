@@ -8,7 +8,7 @@ dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://nitinkumar81715_db_user:Nitin1234@cluster0.avhqbgr.mongodb.net/?appName=Cluster0", {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
       // Connection options for better error handling
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
