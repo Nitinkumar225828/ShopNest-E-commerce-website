@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const path = require('path');
-const routes = require('./routes/authroutes');
+const routes = require('./routes/authRoutes');
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 });
 
 // Use the authentication routes
-app.use('/api/auth', require('./routes/authroutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRouters'));
 app.use('/api/payment', require('./routes/paymentRoutes'));
