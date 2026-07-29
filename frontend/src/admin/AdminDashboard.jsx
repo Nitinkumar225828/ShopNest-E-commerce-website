@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const getStoredUser = () => {
   try {
@@ -27,7 +28,7 @@ const AdminDashboard = () => {
 
     const fetchStats = async () => {
       try {
-        const res = await fetch('/api/admin', {
+        const res = await fetch(`${API_URL}/api/admin`, {
           headers: { Authorization: `Bearer ${activeUser.token}` }
         });
         const data = await res.json();

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const getStoredUser = () => {
   try {
@@ -31,7 +32,7 @@ const Profile = () => {
 
     const fetchMyOrders = async () => {
       try {
-        const res = await fetch('/api/orders/myorders', {
+        const res = await fetch(`${API_URL}/api/orders/myorders`, {
           headers: { Authorization: `Bearer ${activeUser.token}` }
         });
         const data = await res.json();
