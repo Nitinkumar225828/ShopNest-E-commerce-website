@@ -39,15 +39,20 @@ const userRegister = async (req, res) => {
 
       const message = `Welcome to ShopNest, ${userName} Your OTP for registration is: ${otp}. It will expire in 10 minutes.`;
 
-      await sendEmail(email, "ShopNest Registration OTP", message);
-      res.status(201).json({  
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-        message: "User registered successfully. Please check your email for the OTP.",
-        token: generateToken(user)
-      });
+      try {
+          await sendEmail(email, "ShopNest Registration OTP", message);
+          } catch (emailError) {
+          console.error("Email Error:", emailError.message);
+          }
+
+res.status(201).json({
+  _id: user._id,
+  username: user.username,
+  email: user.email,
+  role: user.role,
+  message: "User registered successfully.",
+  token: generateToken(user)
+});
     } else {
       res.status(400).json({ message: "Invalid user data" });
     }
