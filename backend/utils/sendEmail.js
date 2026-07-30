@@ -2,48 +2,27 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (to, subject, text) => {
   try {
-    const emailUser = (
-      process.env.EMAIL_USER ||
-      process.env.Email_USER ||
-      ""
-    ).trim();
-
-    const emailPass = (
-      process.env.EMAIL_PASS ||
-      process.env.Email_PASS ||
-      process.env.GMAIL_PASS ||
-      ""
-    )
-      .replace(/\s+/g, "")
-      .trim();
+    const emailUser = (process.env.EMAIL_USER || "").trim();
+    const emailPass = (process.env.EMAIL_PASS || "").trim();
 
     if (!emailUser || !emailPass) {
-      throw new Error(
-        "Email credentials are missing. Check EMAIL_USER and EMAIL_PASS in Render."
-      );
+      throw new Error("EMAIL_USER or EMAIL_PASS is missing in environment variables.");
     }
 
-    // Gmail SMTP Transporter
+    // Brevo SMTP Configuration
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp-relay.brevo.com",
       port: 587,
-      secure: false, // TLS
-      family: 4, // Force IPv4 (fixes ENETUNREACH on Render)
+      secure: false,
       auth: {
         user: emailUser,
         pass: emailPass,
       },
-      tls: {
-        rejectUnauthorized: false,
-      },
-      connectionTimeout: 30000,
-      greetingTimeout: 30000,
-      socketTimeout: 30000,
     });
 
     // Verify SMTP connection
     await transporter.verify();
-    console.log("✅ SMTP Connected Successfully");
+    console.log("✅ Brevo SMTP Connected Successfully");
 
     const mailOptions = {
       from: `"ShopNest" <${emailUser}>`,
@@ -59,7 +38,7 @@ const sendEmail = async (to, subject, text) => {
 
     return info;
   } catch (error) {
-    console.error("❌ Error sending email:", error);
+    console.error("❌ Error sending email:", error.message);
     throw error;
   }
 };
